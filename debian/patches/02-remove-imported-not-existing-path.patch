@@ -1,0 +1,14 @@
+--- a/cmake/GzImportTarget.cmake	2025-03-04 12:27:46.596846616 +0100
++++ b/cmake/GzImportTarget.cmake	2025-03-04 12:29:42.625109427 +0100
+@@ -118,6 +118,11 @@
+       # But this will not be possible until we are using whichever version of cmake
+       # the PR https://gitlab.kitware.com/cmake/cmake/merge_requests/1264
+       # is available for.
++      foreach(gz_target_INCLUDE_PATH ${gz_import_target_INCLUDE_VAR})
++          if(NOT EXISTS ${gz_target_INCLUDE_PATH})
++              list(REMOVE_ITEM gz_import_target_INCLUDE_VAR ${gz_target_INCLUDE_PATH})
++          endif()
++      endforeach()
+       set_property(
+         TARGET ${target_name}
+         PROPERTY INTERFACE_INCLUDE_DIRECTORIES
