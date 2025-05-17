@@ -1,5 +1,22 @@
 ## Gazebo CMake 4.x
 
+### Gazebo CMake 4.2.0 (2025-04-25)
+
+1. **Baseline:** this includes all changes from 4.1.1 and earlier.
+
+1. Doxygen: use `MARKDOWN_ID_STYLE` = GITHUB
+    * [Pull request #491](https://github.com/gazebosim/gz-cmake/pull/491)
+
+1. Avoid warnings on unused `CMAKE_BUILD_TYPE` on Windows
+    * [Pull request #487](https://github.com/gazebosim/gz-cmake/pull/487)
+
+1. Integrate Ogre-Next 3.x.x built from source
+    * [Pull request #468](https://github.com/gazebosim/gz-cmake/pull/468)
+
+1. Reduce example names to be able to run Conda CI on Windows (gz-cmake4)
+    * [Pull request #476](https://github.com/gazebosim/gz-cmake/pull/476)
+    * [Pull request #478](https://github.com/gazebosim/gz-cmake/pull/478)
+
 ### Gazebo CMake 4.1.1 (2025-02-24)
 
 1. Normalize header install path
@@ -68,6 +85,23 @@
     * [Pull request #390](https://github.com/gazebosim/gz-cmake/pull/390)
 
 ## Gazebo CMake 3.x
+
+### Gazebo CMake 3.5.5 (2025-02-27)
+
+1. Normalize header install path
+    * [Pull request #467](https://github.com/gazebosim/gz-cmake/pull/467)
+    * [Pull request #474](https://github.com/gazebosim/gz-cmake/pull/474)
+
+1. Only find python if needed
+    * [Pull request #473](https://github.com/gazebosim/gz-cmake/pull/473)
+
+### Gazebo CMake 3.5.4 (2025-01-30)
+
+1. Accept arbitrary capitalization for coverage build type
+    * [Pull request #435](https://github.com/gazebosim/gz-cmake/pull/435)
+
+1. Fix link for Sanitizer Builds tutorial
+    * [Pull request #433](https://github.com/gazebosim/gz-cmake/pull/433)
 
 ### Gazebo CMake 3.5.3 (2024-05-02)
 

@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.22.1 FATAL_ERROR)
 #============================================================================
 # Initialize the project
 #============================================================================
-project(gz-cmake4 VERSION 4.1.1)
+project(gz-cmake4 VERSION 4.2.0)
 
 #--------------------------------------
 # Initialize the GZ_CMAKE_DIR variable with the location of the cmake
@@ -227,3 +227,9 @@ gz_create_docs(
   API_MAINPAGE_MD "${CMAKE_BINARY_DIR}/api.md"
   TUTORIALS_MAINPAGE_MD "${CMAKE_BINARY_DIR}/tutorials.md"
   )
+
+# Workaround to avoid warnings when using CMAKE_BUILD_TYPE in colcon
+# to build other projects and gz-cmake together on Windows
+if(DEFINED CMAKE_BUILD_TYPE)
+  set(_dummy_var "${CMAKE_BUILD_TYPE}")
+endif()
