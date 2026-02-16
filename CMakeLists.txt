@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.22.1 FATAL_ERROR)
 #============================================================================
 # Initialize the project
 #============================================================================
-project(gz-cmake4 VERSION 4.2.0)
+project(gz-cmake VERSION 5.0.2)
 
 #--------------------------------------
 # Initialize the GZ_CMAKE_DIR variable with the location of the cmake
@@ -65,10 +65,6 @@ set(gz_pkgconfig_input "${CMAKE_CURRENT_SOURCE_DIR}/config/gz-cmake.pc.in")
 set(gz_pkgconfig_output "${CMAKE_BINARY_DIR}/${PROJECT_NAME}.pc")
 set(gz_pkgconfig_install_dir "${CMAKE_INSTALL_LIBDIR}/pkgconfig")
 set(gz_pkgconfig_abs_install_dir "${CMAKE_INSTALL_FULL_LIBDIR}/pkgconfig")
-set(gz_utilities_target ${PROJECT_EXPORT_NAME}-utilities)
-set(gz_utilities_import_target_name ${PROJECT_EXPORT_NAME}::${gz_utilities_target})
-set(gz_utilities_target_output_filename "${gz_utilities_target}-targets.cmake")
-set(simple_utilities_import_name ${PROJECT_EXPORT_NAME}::utilities)
 
 #--------------------------------------
 # Configure and install the config file
@@ -101,12 +97,13 @@ file(RELATIVE_PATH
   "${CMAKE_INSTALL_PREFIX}"
 )
 
-# TODO(jrivero): CMake 3.20 provides cmake_path(APPEND) which implements the
-# same functionality as join_paths(). Remove JoinPaths in the next major version
-# if all the supported platforms are in 3.20 version.
-include(JoinPaths)
-join_paths(GZ_PC_LIBDIR "\${prefix}" "${CMAKE_INSTALL_LIBDIR}")
-join_paths(GZ_PC_INCLUDEDIR "\${prefix}" "${CMAKE_INSTALL_INCLUDEDIR}" "${GZ_INCLUDE_INSTALL_DIR_POSTFIX}")
+# Use cmake_path(APPEND) to construct path variables used in pkg-config file.
+# Since the first argument to this function must be a cmake variable (not a
+# string constant, initialize the variable to the first path component.
+set(GZ_PC_LIBDIR "\${prefix}")
+cmake_path(APPEND GZ_PC_LIBDIR "${CMAKE_INSTALL_LIBDIR}")
+set(GZ_PC_INCLUDEDIR "\${prefix}")
+cmake_path(APPEND GZ_PC_INCLUDEDIR "${CMAKE_INSTALL_INCLUDEDIR}" "${GZ_INCLUDE_INSTALL_DIR_POSTFIX}")
 
 configure_file(${gz_pkgconfig_input} ${gz_pkgconfig_output} @ONLY)
 
@@ -114,41 +111,6 @@ install(
   FILES ${gz_pkgconfig_output}
   DESTINATION ${gz_pkgconfig_install_dir}
   COMPONENT pkgconfig)
-
-#============================================================================
-# Create and install the utilities component
-#============================================================================
-# Deprecated: Remove the utilities component in gz-cmake4
-add_library(${gz_utilities_target} INTERFACE)
-target_include_directories(${gz_utilities_target}
-  INTERFACE
-    $<INSTALL_INTERFACE:${GZ_INCLUDE_INSTALL_DIR_FULL}>
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/include>)
-
-# Export and install the interface target
-install(
-  TARGETS ${gz_utilities_target}
-  EXPORT ${gz_utilities_target}
-  COMPONENT interface)
-
-export(
-  EXPORT ${gz_utilities_target}
-  FILE ${gz_utilities_target_output_filename}
-  NAMESPACE ${PROJECT_EXPORT_NAME}::)
-
-install(
-  EXPORT ${gz_utilities_target}
-  DESTINATION ${gz_config_install_dir}
-  FILE ${gz_utilities_target_output_filename}
-  NAMESPACE ${PROJECT_EXPORT_NAME}::)
-
-# Install the header directory
-# Note: The trailing slash after "include" is necessary
-install(
-  DIRECTORY include/
-  DESTINATION ${GZ_INCLUDE_INSTALL_DIR_FULL}
-  COMPONENT headers)
 
 #============================================================================
 # Install the files for this package

@@ -9,9 +9,9 @@
 
 Build | Status
 -- | --
-Ubuntu Noble  | [![Build Status](https://build.osrfoundation.org/buildStatus/icon?job=gz_cmake-ci-gz-cmake4-noble-amd64)](https://build.osrfoundation.org/job/gz_cmake-ci-gz-cmake4-noble-amd64)
-Homebrew      | [![Build Status](https://build.osrfoundation.org/buildStatus/icon?job=gz_cmake-ci-gz-cmake4-homebrew-amd64)](https://build.osrfoundation.org/job/gz_cmake-ci-gz-cmake4-homebrew-amd64)
-Windows       | [![Build Status](https://build.osrfoundation.org/buildStatus/icon?job=gz_cmake-4-clowin)](https://build.osrfoundation.org/job/gz_cmake-4-clowin)
+Ubuntu Noble  | [![Build Status](https://build.osrfoundation.org/buildStatus/icon?job=gz_cmake-ci-gz-cmake5-noble-amd64)](https://build.osrfoundation.org/job/gz_cmake-ci-gz-cmake5-noble-amd64)
+Homebrew      | [![Build Status](https://build.osrfoundation.org/buildStatus/icon?job=gz_cmake-ci-gz-cmake5-homebrew-amd64)](https://build.osrfoundation.org/job/gz_cmake-ci-gz-cmake5-homebrew-amd64)
+Windows       | [![Build Status](https://build.osrfoundation.org/buildStatus/icon?job=gz_cmake-5-cnlwin)](https://build.osrfoundation.org/job/gz_cmake-5-cnlwin)
 
 # Table of Contents
 
@@ -59,8 +59,8 @@ The [Source Install](#source-install) instructions should be used if you need th
 
 On Ubuntu systems, `apt-get` can be used to install `gz-cmake`:
 
-```
-$ sudo apt install libgz-cmake<#>-dev
+```bash
+sudo apt install libgz-cmake<#>-dev
 ```
 
 Be sure to replace `<#>` with a number value, such as `1` or `2`, depending on which version you need.
@@ -71,22 +71,22 @@ Be sure to replace `<#>` with a number value, such as `1` or `2`, depending on w
 
 The only prerequisite of `gz-cmake` is `cmake`. Ubuntu users can install cmake with the package manager:
 
-```
-$ sudo apt install cmake
+```bash
+sudo apt install cmake
 ```
 
 ### Building from source
 
 To build and install from source, you can clone the repo and use cmake to install the modules as though this is a regular cmake project:
 
-```
-$ git clone https://github.com/gazebosim/gz-cmake
-$ cd gz-cmake
-$ mkdir build
-$ cd build
-$ cmake .. -DCMAKE_INSTALL_PREFIX=/path/to/install/dir
-$ make -j8
-$ make install
+```bash
+git clone https://github.com/gazebosim/gz-cmake
+cd gz-cmake
+mkdir build
+cd build
+cmake .. -DCMAKE_INSTALL_PREFIX=/path/to/install/dir
+make -j8
+make install
 ```
 
 Replace `/path/to/install/dir` to whatever directory you want to install this package to.
@@ -95,22 +95,22 @@ Replace `/path/to/install/dir` to whatever directory you want to install this pa
 
 Documentation can be accessed at https://gazebosim.org/libs/cmake
 
-[Examples](https://github.com/gazebosim/gz-cmake/tree/gz-cmake4/examples) are available in this repository.
+[Examples](https://github.com/gazebosim/gz-cmake/tree/gz-cmake5/examples) are available in this repository.
 
-[Tutorials](https://github.com/gazebosim/gz-cmake/tree/gz-cmake4/tutorials) are also available in this repository.
+[Tutorials](https://github.com/gazebosim/gz-cmake/tree/gz-cmake5/tutorials) are also available in this repository.
 
 # Documentation
 
-Documentation for `gz-cmake` can be found within the source code, and also in the [MIGRATION.md guide](https://github.com/gazebosim/gz-cmake/blob/gz-cmake4/Migration.md).
+Documentation for `gz-cmake` can be found within the source code, and also in the [MIGRATION.md guide](https://github.com/gazebosim/gz-cmake/blob/gz-cmake5/Migration.md).
 
 # Testing
 
 A fuller suite of tests in the `examples` directory can be enabled by building with `BUILDSYSTEM_TESTING` enabled.
 Tests can be run by building the `test` target. From your build directory you can run:
 
-```
-$ cmake .. -DBUILDSYSTEM_TESTING=1
-$ make test
+```bash
+cmake .. -DBUILDSYSTEM_TESTING=1
+make test
 ```
 
 # Folder Structure
