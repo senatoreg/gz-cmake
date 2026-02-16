@@ -1,10 +1,11 @@
 --- a/cmake/FindGzOGRE2.cmake	2024-11-05 06:50:53.105121346 +0100
 +++ b/cmake/FindGzOGRE2.cmake	2024-11-05 10:15:37.405623851 +0100
-@@ -52,7 +52,11 @@
- #                     COMPONENTS HlmsPbs HlmsUnlit Overlay)
+@@ -68,8 +68,11 @@
+   "was requested to be found"
+ )
  
- 
--if(NOT (GzOGRE2_FIND_VERSION_MAJOR AND GzOGRE2_FIND_VERSION_MINOR))
+-if (NOT (DEFINED GzOGRE2_FIND_VERSION_MAJOR AND DEFINED
+-    GzOGRE2_FIND_VERSION_MINOR))
 +if(NOT GZ_OGRE2_PROJECT_NAME)
 +    set(GZ_OGRE2_PROJECT_NAME "OGRE2")
 +endif()
@@ -13,7 +14,7 @@
    message(WARNING
      "find_package(GzOGRE2) must be called with a VERSION argument with a minimum of major and minor version")
    set(OGRE2_FOUND false)
-@@ -64,8 +68,8 @@
+@@ -81,8 +84,8 @@
  #  - Modern versions using X.Y.Z starting with 13.y.z
  # Reduce valid versions to 2.x series
  if (${GzOGRE2_FIND_VERSION_MAJOR})
